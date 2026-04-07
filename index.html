@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NetflixX – Stream Unlimited</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-left">
+      <div class="logo">NETFLIXX</div>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">TV Shows</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">New &amp; Popular</a></li>
+        <li><a href="#">My List</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search titles…"/>
+        <span class="search-icon">⌕</span>
+      </div>
+      <button class="btn-notification">🔔</button>
+      <div class="avatar">JD</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ #1 in India Today</div>
+      <h1 class="hero-title">Stranger<br/><span>Things</span></h1>
+      <p class="hero-desc">When a boy vanishes, a small town uncovers an extraordinary mystery involving secret experiments and terrifying supernatural forces.</p>
+      <div class="hero-meta">
+        <span class="rating">⭐ 8.7</span>
+        <span class="year">2024</span>
+        <span class="duration">4 Seasons</span>
+        <span class="tag">Sci-Fi</span>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-play" onclick="showModal('Stranger Things')">▶ Play Now</button>
+        <button class="btn-info" onclick="showModal('Stranger Things')">ℹ More Info</button>
+        <button class="btn-add" id="heroAddBtn" onclick="toggleMyList('Stranger Things', this)">+ My List</button>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <main class="content" id="mainContent">
+
+    <section class="row-section">
+      <h2 class="section-title">🔥 Trending Now</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn prev-btn" onclick="slide(this, -1)">‹</button>
+        <div class="movie-row" id="trending"></div>
+        <button class="slide-btn next-btn" onclick="slide(this, 1)">›</button>
+      </div>
+    </section>
+
+    <section class="row-section">
+      <h2 class="section-title">🎬 Top Rated Movies</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn prev-btn" onclick="slide(this, -1)">‹</button>
+        <div class="movie-row" id="topRated"></div>
+        <button class="slide-btn next-btn" onclick="slide(this, 1)">›</button>
+      </div>
+    </section>
+
+    <section class="row-section">
+      <h2 class="section-title">📺 Popular TV Shows</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn prev-btn" onclick="slide(this, -1)">‹</button>
+        <div class="movie-row" id="tvShows"></div>
+        <button class="slide-btn next-btn" onclick="slide(this, 1)">›</button>
+      </div>
+    </section>
+
+    <section class="row-section">
+      <h2 class="section-title">⚡ Action &amp; Adventure</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn prev-btn" onclick="slide(this, -1)">‹</button>
+        <div class="movie-row" id="action"></div>
+        <button class="slide-btn next-btn" onclick="slide(this, 1)">›</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-hero">
+        <div class="modal-hero-bg" id="modalBg"></div>
+        <div class="modal-hero-info">
+          <h2 id="modalTitle"></h2>
+          <div class="modal-meta">
+            <span id="modalRating"></span>
+            <span id="modalYear"></span>
+            <span id="modalGenre"></span>
+          </div>
+          <p id="modalDesc"></p>
+          <div class="modal-btns">
+            <button class="btn-play" onclick="alert('▶ Playing...')">▶ Play</button>
+            <button class="btn-add" id="modalAddBtn">+ My List</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-details">
+        <div class="detail-col">
+          <p><strong>Cast:</strong> <span id="modalCast"></span></p>
+          <p><strong>Director:</strong> <span id="modalDir"></span></p>
+        </div>
+        <div class="detail-col">
+          <p><strong>Genres:</strong> <span id="modalTags"></span></p>
+          <p><strong>This show is:</strong> <span id="modalMood"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <p>© 2024 NetflixX Clone – Built for educational purposes only.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
