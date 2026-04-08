@@ -1,188 +1,536 @@
-// DATA
-const movies = {
-  trending: [
-    { id: 1, title: 'Stranger Things', year: 2024, rating: '8.7', genre: 'Sci-Fi', duration: '4 Seasons', desc: 'A boy vanishes. A town uncovers a mystery involving secret experiments and supernatural forces.', cast: 'Millie Bobby Brown, Finn Wolfhard', dir: 'The Duffer Brothers', mood: 'Mind-bending, Supernatural, Dark', color: '#1a0533' },
-    { id: 2, title: 'The Crown', year: 2023, rating: '8.6', genre: 'Drama', duration: '6 Seasons', desc: 'The personal and political life of Queen Elizabeth II from the 1940s to modern day.', cast: 'Claire Foy, Olivia Colman', dir: 'Peter Morgan', mood: 'Royal, Dramatic, Historical', color: '#0d1a2a' },
-    { id: 3, title: 'Wednesday', year: 2023, rating: '8.1', genre: 'Comedy', duration: '2 Seasons', desc: "Wednesday Addams navigates her years at Nevermore Academy in this supernatural mystery series.", cast: 'Jenna Ortega, Gwendoline Christie', dir: 'Tim Burton', mood: 'Quirky, Dark Comedy, Mystery', color: '#1a1a0d' },
-    { id: 4, title: 'Dark', year: 2020, rating: '8.8', genre: 'Thriller', duration: '3 Seasons', desc: "A time-travel conspiracy mystery set in a German town across multiple time periods.", cast: 'Louis Hofmann, Lisa Vicari', dir: 'Baran bo Odar', mood: 'Complex, Mysterious, Slow-burn', color: '#0d0d1a' },
-    { id: 5, title: 'Ozark', year: 2022, rating: '8.5', genre: 'Crime', duration: '4 Seasons', desc: 'A financial adviser drags his family from Chicago to the Ozarks to launder money for a drug boss.', cast: 'Jason Bateman, Laura Linney', dir: 'Jason Bateman', mood: 'Gripping, Dark, Intense', color: '#0a1a14' },
-    { id: 6, title: 'Money Heist', year: 2021, rating: '8.3', genre: 'Action', duration: '5 Seasons', desc: 'A criminal mastermind who goes by "The Professor" recruits criminals to carry out elaborate heists.', cast: 'Álvaro Morte, Itziar Ituño', dir: 'Álex Pina', mood: 'Thrilling, Smart, Emotional', color: '#1a0d0d' },
-    { id: 7, title: 'Squid Game', year: 2021, rating: '8.0', genre: 'Thriller', duration: '2 Seasons', desc: '456 desperate people play deadly children games for prize money of 45.6 billion won.', cast: 'Lee Jung-jae, Park Hae-soo', dir: 'Hwang Dong-hyuk', mood: 'Violent, Thrilling, Shocking', color: '#1a0d14' },
-    { id: 8, title: 'Breaking Bad', year: 2013, rating: '9.5', genre: 'Drama', duration: '5 Seasons', desc: 'A high school chemistry teacher diagnosed with cancer turns to manufacturing drugs.', cast: 'Bryan Cranston, Aaron Paul', dir: 'Vince Gilligan', mood: 'Intense, Dark, Transformative', color: '#1a1a0a' },
-  ],
-  topRated: [
-    { id: 9, title: 'The Witcher', year: 2023, rating: '8.2', genre: 'Fantasy', duration: '3 Seasons', desc: 'Geralt of Rivia, a mutated monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.', cast: 'Henry Cavill, Freya Allan', dir: 'Lauren Schmidt Hissrich', mood: 'Epic, Fantasy, Dark', color: '#0d1a0d' },
-    { id: 10, title: 'Narcos', year: 2017, rating: '8.8', genre: 'Crime', duration: '3 Seasons', desc: 'The story of drug kingpin Pablo Escobar and the Medellín Cartel.', cast: 'Wagner Moura, Boyd Holbrook', dir: 'Chris Brancato', mood: 'Gritty, Historical, Intense', color: '#1a1505' },
-    { id: 11, title: 'The Last Dance', year: 2020, rating: '9.1', genre: 'Documentary', duration: '1 Season', desc: "Michael Jordan and the Chicago Bulls' dynasty as seen through the 1997-98 NBA season.", cast: 'Michael Jordan, Dennis Rodman', dir: 'Jason Hehir', mood: 'Inspiring, Competitive, Emotional', color: '#08101a' },
-    { id: 12, title: 'Peaky Blinders', year: 2022, rating: '8.8', genre: 'Drama', duration: '6 Seasons', desc: 'A gangster family epic set in 1900s England, centering on the Shelby crime family.', cast: 'Cillian Murphy, Helen McCrory', dir: 'Steven Knight', mood: 'Stylish, Violent, Atmospheric', color: '#0a0a0a' },
-    { id: 13, title: 'House of Cards', year: 2018, rating: '8.7', genre: 'Political', duration: '6 Seasons', desc: 'A Congressman works with his wife to exact revenge on those who betrayed him.', cast: 'Kevin Spacey, Robin Wright', dir: 'Beau Willimon', mood: 'Political, Scheming, Dramatic', color: '#0d1420' },
-    { id: 14, title: 'Mindhunter', year: 2019, rating: '8.6', genre: 'Thriller', duration: '2 Seasons', desc: 'Set in the late 1970s, FBI agents interview imprisoned serial killers to solve ongoing murder cases.', cast: 'Jonathan Groff, Holt McCallany', dir: 'David Fincher', mood: 'Psychological, Disturbing, Intelligent', color: '#0a0d1a' },
-  ],
-  tvShows: [
-    { id: 15, title: 'Bridgerton', year: 2023, rating: '7.3', genre: 'Romance', duration: '3 Seasons', desc: 'Follows the competitive world of Regency era London high society and the Bridgerton family.', cast: 'Phoebe Dynevor, Regé-Jean Page', dir: 'Chris Van Dusen', mood: 'Romantic, Dramatic, Escapist', color: '#1a0a1a' },
-    { id: 16, title: "Emily in Paris", year: 2023, rating: '7.0', genre: 'Comedy', duration: '4 Seasons', desc: "An American woman moves to Paris unexpectedly and navigates a new city and love life.", cast: 'Lily Collins, Ashley Park', dir: 'Darren Star', mood: 'Light, Romantic, Fun', color: '#1a0d0a' },
-    { id: 17, title: 'Cobra Kai', year: 2023, rating: '8.5', genre: 'Action', duration: '6 Seasons', desc: "Thirty-four years after the 1984 All Valley Karate Tournament, Johnny Lawrence and Daniel LaRusso reignite their rivalry.", cast: 'Ralph Macchio, William Zabka', dir: 'Jon Hurwitz', mood: 'Nostalgic, Action, Emotional', color: '#1a1a08' },
-    { id: 18, title: 'The Umbrella Academy', year: 2023, rating: '7.9', genre: 'Superhero', duration: '3 Seasons', desc: 'Follows a dysfunctional family of adopted sibling superheroes who reunite to solve the mystery of their father\'s death.', cast: 'Elliot Page, Tom Hopper', dir: 'Steve Blackman', mood: 'Quirky, Action, Unique', color: '#120a1a' },
-  ],
-  action: [
-    { id: 19, title: 'Extraction', year: 2023, rating: '7.2', genre: 'Action', duration: 'Film', desc: 'A black market mercenary embarks on the most deadly extraction mission of his career.', cast: 'Chris Hemsworth, Rudhraksh Jaiswal', dir: 'Sam Hargrave', mood: 'Intense, Action, Violent', color: '#1a0a05' },
-    { id: 20, title: 'The Old Guard', year: 2020, rating: '6.6', genre: 'Action', duration: 'Film', desc: 'Led by a warrior named Andy, a covert group of immortal mercenaries take on an unexpected threat.', cast: 'Charlize Theron, KiKi Layne', dir: 'Gina Prince-Bythewood', mood: 'Action, Fantasy, Emotional', color: '#0a0a1a' },
-    { id: 21, title: 'Bright', year: 2017, rating: '6.3', genre: 'Action', duration: 'Film', desc: 'In an alternate present-day, two cops patrol the streets of Los Angeles in a world where humans, orcs, and elves co-exist.', cast: 'Will Smith, Joel Edgerton', dir: 'David Ayer', mood: 'Fantasy, Action, Gritty', color: '#0d1408' },
-    { id: 22, title: 'Project Power', year: 2020, rating: '6.0', genre: 'Action', duration: 'Film', desc: 'When a new pill grants unpredictable superpowers, a cop and ex-soldier must hunt down its supplier.', cast: 'Jamie Foxx, Joseph Gordon-Levitt', dir: 'Henry Joost', mood: 'Action, Superhero, Thriller', color: '#140a1a' },
-    { id: 23, title: 'Red Notice', year: 2021, rating: '6.3', genre: 'Action', duration: 'Film', desc: 'An Interpol agent tracks the world\'s most wanted art thief in a heist gone wrong.', cast: 'Dwayne Johnson, Ryan Reynolds', dir: 'Rawson Marshall Thurber', mood: 'Fun, Action, Comedy', color: '#1a0f0a' },
-    { id: 24, title: 'The Gray Man', year: 2022, rating: '6.5', genre: 'Action', duration: 'Film', desc: 'A CIA agent discovers agency secrets and suddenly becomes a target along with a mercenary.', cast: 'Ryan Gosling, Chris Evans', dir: 'Anthony & Joe Russo', mood: 'Slick, Action, Intense', color: '#080d1a' },
-  ]
-};
+// ============================================================
+//  NETFLIXX — Complete App Logic
+// ============================================================
 
-const gradients = [
-  'linear-gradient(135deg, #1a0533, #2d0a1e)',
-  'linear-gradient(135deg, #0d1a2a, #1a2d1a)',
-  'linear-gradient(135deg, #1a1a0d, #2a1a0a)',
-  'linear-gradient(135deg, #0a1a14, #1a2a0a)',
-  'linear-gradient(135deg, #1a0d0d, #2a0a14)',
-  'linear-gradient(135deg, #0d0d1a, #1a0d2a)',
-  'linear-gradient(135deg, #0a0a1a, #1a0a2a)',
-  'linear-gradient(135deg, #1a0a0a, #2a1a0a)',
-];
+/* ---- STATE ---- */
+let myList = JSON.parse(localStorage.getItem('nx_mylist') || '[]');
+let currentModal = null;
+let playerInterval = null;
+let playerProgress = 0;
+let playerPlaying = false;
+let currentFilterGenre = 'All';
+let currentPage = 'home';
 
-let myList = JSON.parse(localStorage.getItem('netflixx_mylist') || '[]');
+/* ============================================================
+   INIT
+============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  renderAllRows();
+  buildGenreFilters();
+  renderTVShows();
+  renderMovies();
+  renderMyList();
+  renderNewPopular();
+  updateHeroListBtn();
+  startHeroCycle();
 
-// RENDER CARDS
-function renderCards(containerId, items) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-  items.forEach((item, index) => {
-    const grad = gradients[index % gradients.length];
-    const isAdded = myList.includes(item.title);
-    const card = document.createElement('div');
-    card.className = 'movie-card';
-    card.innerHTML = `
-      <div class="movie-card-bg" style="background: ${grad};"></div>
-      <div class="rank-badge">#${index + 1}</div>
-      <div class="movie-card-overlay">
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">${item.year} · ${item.genre} · ⭐${item.rating}</div>
-        <div class="card-actions">
-          <button class="card-btn play" onclick="showModal('${item.title}')">▶</button>
-          <button class="card-btn" onclick="toggleMyList('${item.title}', this)">${isAdded ? '✓' : '+'}</button>
-        </div>
-      </div>
-    `;
-    card.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('card-btn')) showModal(item.title);
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('solid', window.scrollY > 60);
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.profile-menu')) closeProfileMenu();
+    if (!e.target.closest('.notif-btn')) closeNotifPanel();
+    if (!e.target.closest('.search-container')) {
+      const si = document.getElementById('searchInput');
+      if (!si.value) si.classList.remove('open');
+    }
+  });
+});
+
+/* ============================================================
+   HERO CAROUSEL
+============================================================ */
+const heroItems = [0, 1, 2, 3, 5]; // indices into ALL_CONTENT
+let heroIndex = 0;
+
+function startHeroCycle() {
+  setHero(heroItems[heroIndex]);
+  setInterval(() => {
+    heroIndex = (heroIndex + 1) % heroItems.length;
+    setHero(heroItems[heroIndex]);
+  }, 8000);
+}
+
+function setHero(id) {
+  const item = ALL_CONTENT[id];
+  if (!item) return;
+  const bg = document.getElementById('heroBg');
+  bg.style.background = `linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%),
+    linear-gradient(135deg, ${item.color} 0%, #141414 100%)`;
+  document.getElementById('heroTitle').innerHTML = item.title.replace(/ /, '<br/><em>') + '</em>';
+  document.getElementById('heroDesc').textContent = item.desc;
+  document.getElementById('heroBadge').textContent = `🏆 #${id + 1} in India Today`;
+  document.getElementById('heroTags').innerHTML = item.tags.map(t => `<span>${t}</span>`).join('');
+  // Update play/more buttons
+  document.querySelector('.hero-btns .btn-play').onclick = () => openPlayer(item.id);
+  document.querySelector('.hero-btns .btn-more').onclick = () => openModal(item.id);
+  document.querySelector('.hero-btns .btn-list').onclick = function(){ toggleMyList(item.id, this); };
+  updateHeroListBtn();
+}
+
+function updateHeroListBtn() {
+  const btn = document.getElementById('heroListBtn');
+  if (!btn) return;
+  const id = ALL_CONTENT[heroItems[heroIndex]]?.id;
+  btn.textContent = myList.includes(id) ? '✓ My List' : '＋ My List';
+  btn.classList.toggle('added', myList.includes(id));
+}
+
+/* ============================================================
+   RENDER ROWS
+============================================================ */
+function renderAllRows() {
+  Object.entries(CONTENT_ROWS).forEach(([rowId, ids]) => {
+    const container = document.getElementById(rowId);
+    if (!container) return;
+    container.innerHTML = '';
+    ids.forEach((id, idx) => {
+      const item = getById(id);
+      if (!item) return;
+      container.appendChild(createCard(item, idx + 1));
     });
-    container.appendChild(card);
   });
 }
 
-function getAllMovies() {
-  return [...movies.trending, ...movies.topRated, ...movies.tvShows, ...movies.action];
+function createCard(item, rank) {
+  const div = document.createElement('div');
+  div.className = 'movie-card';
+  div.innerHTML = `
+    <div class="card-bg" style="background: linear-gradient(135deg, ${item.color}, #141414);"></div>
+    ${rank ? `<div class="card-rank">#${rank}</div>` : ''}
+    <div class="card-overlay">
+      <div class="card-title">${item.emoji} ${item.title}</div>
+      <div class="card-meta">${item.year} · ${item.genre} · ⭐${item.rating}</div>
+      <div class="card-actions-row">
+        <button class="card-btn play" onclick="event.stopPropagation();openPlayer(${item.id})">▶</button>
+        <button class="card-btn" onclick="event.stopPropagation();toggleMyListCard(${item.id}, this)">${myList.includes(item.id) ? '✓' : '＋'}</button>
+        <button class="card-btn" onclick="event.stopPropagation();openModal(${item.id})">ℹ</button>
+      </div>
+    </div>
+  `;
+  div.addEventListener('click', () => openModal(item.id));
+  return div;
 }
 
-function findMovie(title) {
-  return getAllMovies().find(m => m.title === title);
+/* ============================================================
+   TV SHOWS PAGE
+============================================================ */
+function renderTVShows() {
+  const grid = document.getElementById('tvshowsGrid');
+  if (!grid) return;
+  grid.innerHTML = getAllShows().map(item => createPageCard(item)).join('');
 }
 
-// MODAL
-function showModal(title) {
-  const movie = findMovie(title);
-  if (!movie) return;
-  document.getElementById('modalTitle').textContent = movie.title;
-  document.getElementById('modalRating').textContent = `⭐ ${movie.rating}`;
-  document.getElementById('modalYear').textContent = movie.year;
-  document.getElementById('modalGenre').textContent = movie.genre;
-  document.getElementById('modalDesc').textContent = movie.desc;
-  document.getElementById('modalCast').textContent = movie.cast;
-  document.getElementById('modalDir').textContent = movie.dir;
-  document.getElementById('modalTags').textContent = `${movie.genre}, Thriller, Drama`;
-  document.getElementById('modalMood').textContent = movie.mood;
-  document.getElementById('modalBg').style.background = `linear-gradient(135deg, ${movie.color || '#1a0533'}, #2d0a1e)`;
-  const addBtn = document.getElementById('modalAddBtn');
-  const isAdded = myList.includes(title);
-  addBtn.textContent = isAdded ? '✓ Added' : '+ My List';
-  addBtn.className = isAdded ? 'btn-add added' : 'btn-add';
-  addBtn.onclick = () => toggleMyList(title, addBtn);
-  document.getElementById('modalOverlay').classList.add('active');
+/* ============================================================
+   MOVIES PAGE
+============================================================ */
+function buildGenreFilters() {
+  const container = document.getElementById('genreFilters');
+  if (!container) return;
+  container.innerHTML = GENRES.map(g => `
+    <button class="genre-btn ${g === 'All' ? 'active' : ''}" onclick="filterMovieGenre('${g}', this)">${g}</button>
+  `).join('');
+}
+
+function filterMovieGenre(genre, btn) {
+  currentFilterGenre = genre;
+  document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMovies();
+}
+
+function renderMovies() {
+  const grid = document.getElementById('moviesGrid');
+  if (!grid) return;
+  let items = ALL_CONTENT.filter(c => c.type === 'movie' || c.type === 'show');
+  if (currentFilterGenre !== 'All') {
+    items = items.filter(c => c.genres && c.genres.includes(currentFilterGenre) || c.genre.includes(currentFilterGenre));
+  }
+  grid.innerHTML = items.length ? items.map(item => createPageCard(item)).join('') :
+    `<div class="empty-state"><div class="empty-icon">🎬</div><h3>No titles found</h3><p>Try a different genre</p></div>`;
+}
+
+function createPageCard(item) {
+  return `
+    <div class="page-card" onclick="openModal(${item.id})">
+      <div class="card-bg" style="background: linear-gradient(135deg, ${item.color}, #141414);"></div>
+      <div class="card-overlay">
+        <div class="card-title">${item.emoji} ${item.title}</div>
+        <div class="card-meta">${item.year} · ${item.genre}</div>
+        <div class="card-actions-row" style="margin-top:6px">
+          <button class="card-btn play" onclick="event.stopPropagation();openPlayer(${item.id})">▶ Play</button>
+          <button class="card-btn" onclick="event.stopPropagation();toggleMyListCard(${item.id},this)">${myList.includes(item.id)? '✓':'＋'}</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   MY LIST PAGE
+============================================================ */
+function renderMyList() {
+  const grid = document.getElementById('mylistGrid');
+  const sub = document.getElementById('mylistSubtitle');
+  if (!grid) return;
+  const items = myList.map(id => getById(id)).filter(Boolean);
+  sub.textContent = `${items.length} title${items.length !== 1 ? 's' : ''} saved`;
+  grid.innerHTML = items.length ? items.map(item => createPageCard(item)).join('') :
+    `<div class="empty-state"><div class="empty-icon">📋</div><h3>Your list is empty</h3><p>Add movies and shows to keep track of what you want to watch.</p></div>`;
+}
+
+/* ============================================================
+   NEW & POPULAR PAGE
+============================================================ */
+function renderNewPopular() {
+  const section = document.getElementById('top10Section');
+  if (!section) return;
+  const items = [...ALL_CONTENT].sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 10);
+  section.innerHTML = items.map((item, i) => `
+    <div class="top10-card" onclick="openModal(${item.id})">
+      <div class="top10-number">${i + 1}</div>
+      <div class="top10-thumb" style="background: linear-gradient(135deg, ${item.color}, #141414);">${item.emoji}</div>
+      <div class="top10-info">
+        <div class="top10-title">${item.title}</div>
+        <div class="top10-meta">${item.genre} · ${item.year} · ⭐ ${item.rating}</div>
+      </div>
+      <button class="top10-btn" onclick="event.stopPropagation();openPlayer(${item.id})">▶ Play</button>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   SLIDER
+============================================================ */
+function slideRow(rowId, direction) {
+  const row = document.getElementById(rowId);
+  if (!row) return;
+  row.scrollBy({ left: direction * 800, behavior: 'smooth' });
+}
+
+function checkArrows(rowId) { /* optional: show/hide arrows based on scroll */ }
+
+/* ============================================================
+   VIDEO PLAYER
+============================================================ */
+function openPlayer(id) {
+  const item = getById(id);
+  if (!item) return;
+  const overlay = document.getElementById('playerOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Simulate loading then playing
+  const screen = document.getElementById('playerScreen');
+  screen.innerHTML = `
+    <div class="player-fake-video">
+      <div class="player-spinner"></div>
+      <div class="loading-text">Loading "${item.title}"…</div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    screen.innerHTML = `
+      <div class="player-now-playing" style="background: linear-gradient(135deg, ${item.color}, #0a0a0a);">
+        <div style="font-size:80px;margin-bottom:20px">${item.emoji}</div>
+        <h2 style="font-family:'Bebas Neue';font-size:52px;color:#fff;text-align:center">${item.title}</h2>
+        <p style="color:#aaa;font-size:16px;text-align:center;max-width:500px;margin:0 auto">${item.desc}</p>
+        <div style="margin-top:24px;display:flex;gap:16px;align-items:center;">
+          <button onclick="playerAction('playpause')" style="background:var(--red);border:none;color:#fff;padding:14px 36px;border-radius:4px;font-size:18px;cursor:pointer;font-weight:700;">⏸ Playing</button>
+          <span style="color:#888;font-size:14px">HD · Dolby Atmos</span>
+        </div>
+      </div>
+    `;
+    startPlayerProgress(item);
+  }, 2000);
+
+  document.getElementById('epInfo').textContent = `Now Playing: ${item.title}`;
+}
+
+function startPlayerProgress(item) {
+  playerPlaying = true;
+  playerProgress = 0;
+  document.getElementById('ppBtn').textContent = '⏸';
+  const totalSecs = 3600; // 1 hour fake
+
+  playerInterval = setInterval(() => {
+    if (!playerPlaying) return;
+    playerProgress += 0.5;
+    if (playerProgress >= 100) { playerProgress = 0; }
+    document.getElementById('playerFill').style.width = playerProgress + '%';
+    const elapsed = Math.round(totalSecs * playerProgress / 100);
+    document.getElementById('playerTime').textContent = fmtTime(elapsed);
+    document.getElementById('playerDuration').textContent = fmtTime(totalSecs);
+  }, 500);
+}
+
+function fmtTime(secs) {
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  const s = secs % 60;
+  if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function playerAction(action) {
+  if (action === 'playpause') {
+    playerPlaying = !playerPlaying;
+    document.getElementById('ppBtn').textContent = playerPlaying ? '⏸' : '▶';
+  } else if (action === 'back30') {
+    playerProgress = Math.max(0, playerProgress - 1.4);
+  } else if (action === 'forward30') {
+    playerProgress = Math.min(100, playerProgress + 1.4);
+  } else if (action === 'fullscreen') {
+    const el = document.getElementById('playerOverlay');
+    if (document.fullscreenElement) document.exitFullscreen();
+    else el.requestFullscreen?.();
+  }
+}
+
+function seekVideo(e) {
+  const bar = e.currentTarget;
+  const rect = bar.getBoundingClientRect();
+  playerProgress = ((e.clientX - rect.left) / rect.width) * 100;
+  document.getElementById('playerFill').style.width = playerProgress + '%';
+}
+
+function setVol(v) { /* would control audio volume */ }
+
+function closePlayer() {
+  document.getElementById('playerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  clearInterval(playerInterval);
+  playerPlaying = false;
+}
+
+/* ============================================================
+   DETAIL MODAL
+============================================================ */
+function openModal(id) {
+  const item = getById(id);
+  if (!item) return;
+  currentModal = item;
+
+  document.getElementById('modalHeroBg').style.background =
+    `linear-gradient(135deg, ${item.color} 0%, #2a1a3e 50%, #141414 100%)`;
+  document.getElementById('modalTitle').textContent = item.emoji + ' ' + item.title;
+  document.getElementById('modalTags').innerHTML = item.tags.map(t => `<span>${t}</span>`).join('');
+  document.getElementById('modalDesc').textContent = item.desc;
+  document.getElementById('modalFullDesc').textContent = item.fullDesc || item.desc;
+  document.getElementById('modalMatch').textContent = item.match + '%';
+  document.getElementById('modalMeta').innerHTML = `
+    <div>🎂 Rating: ${item.age || '16+'}</div>
+    <div>⏱ ${item.type === 'show' ? item.seasons + ' Season' + (item.seasons > 1 ? 's' : '') : item.duration}</div>
+    <div>📅 ${item.year}</div>
+  `;
+  document.getElementById('modalCast').textContent = item.cast || '–';
+  document.getElementById('modalGenres').textContent = item.genres || item.genre;
+  document.getElementById('modalMoods').textContent = item.moods || '–';
+
+  // Play & list buttons
+  document.getElementById('modalPlayBtn').onclick = () => openPlayer(id);
+  const listBtn = document.getElementById('modalListBtn');
+  listBtn.textContent = myList.includes(id) ? '✓ My List' : '＋ My List';
+  listBtn.classList.toggle('added', myList.includes(id));
+  listBtn.onclick = () => {
+    toggleMyList(id, listBtn);
+    listBtn.textContent = myList.includes(id) ? '✓ My List' : '＋ My List';
+    listBtn.classList.toggle('added', myList.includes(id));
+  };
+
+  // Episodes
+  buildEpisodes(item);
+  // Related
+  buildRelated(id);
+
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('active');
-  document.body.style.overflow = '';
+function buildEpisodes(item) {
+  const sec = document.getElementById('modalEpisodes');
+  if (!item.episodes || !item.episodes.length) { sec.innerHTML = ''; return; }
+  sec.innerHTML = `
+    <h3>Episodes</h3>
+    <select class="season-select" id="seasonSelect" onchange="changeSeason(this.value, ${item.id})">
+      ${Array.from({length: item.seasons || 1}, (_,i) => `<option value="${i+1}">Season ${i+1}</option>`).join('')}
+    </select>
+    <div class="ep-list" id="epList">
+      ${item.episodes.map((ep, i) => `
+        <div class="ep-item" onclick="openPlayer(${item.id})">
+          <div class="ep-num">${i + 1}</div>
+          <div class="ep-thumb" style="background: linear-gradient(135deg, ${item.color}, #1a1a1a)">
+            ${ep.emoji}
+            <div class="ep-play">▶</div>
+          </div>
+          <div class="ep-info-col">
+            <div class="ep-title">${ep.title}</div>
+            <div class="ep-desc">${ep.desc}</div>
+          </div>
+          <div class="ep-duration">${ep.dur}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
-// MY LIST
-function toggleMyList(title, btn) {
-  event.stopPropagation();
-  const idx = myList.indexOf(title);
+function changeSeason(season, id) {
+  showToast(`Loading Season ${season}…`);
+}
+
+function buildRelated(id) {
+  const grid = document.getElementById('moreLikeThis');
+  const related = getRelated(id);
+  grid.innerHTML = related.map(item => `
+    <div class="more-card" onclick="openModal(${item.id})">
+      <div class="more-card-thumb" style="background: linear-gradient(135deg, ${item.color}, #1a1a1a)">${item.emoji}</div>
+      <div class="more-card-info">
+        <div class="more-card-title">${item.title}</div>
+        <div class="more-card-meta">⭐ ${item.rating} · ${item.genre}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentModal = null;
+}
+
+function handleModalClick(e) {
+  if (e.target === e.currentTarget) closeModal();
+}
+
+function toggleLike(btn) {
+  btn.textContent = btn.textContent === '👍' ? '👍✓' : '👍';
+  showToast('Thanks for your feedback!');
+}
+
+function shareTitle() {
+  if (navigator.share) {
+    navigator.share({ title: currentModal?.title, text: currentModal?.desc });
+  } else {
+    navigator.clipboard?.writeText(window.location.href);
+    showToast('Link copied to clipboard!');
+  }
+}
+
+/* ============================================================
+   MY LIST
+============================================================ */
+function toggleMyList(id, btn) {
+  const idx = myList.indexOf(id);
   if (idx > -1) {
     myList.splice(idx, 1);
-    showToast(`Removed "${title}" from My List`);
-    btn.textContent = '+';
-    btn.classList.remove('added');
+    showToast(`Removed from My List`);
   } else {
-    myList.push(title);
-    showToast(`Added "${title}" to My List ✓`);
-    btn.textContent = '✓';
-    btn.classList.add('added');
+    myList.push(id);
+    const item = getById(id);
+    showToast(`${item?.title} added to My List ✓`);
   }
-  localStorage.setItem('netflixx_mylist', JSON.stringify(myList));
+  localStorage.setItem('nx_mylist', JSON.stringify(myList));
+  if (btn) {
+    btn.textContent = myList.includes(id) ? '✓ My List' : '＋ My List';
+    btn.classList.toggle('added', myList.includes(id));
+  }
+  renderMyList();
+  renderAllRows();
 }
 
-// TOAST
+function toggleMyListCard(id, btn) {
+  toggleMyList(id, null);
+  btn.textContent = myList.includes(id) ? '✓' : '＋';
+}
+
+/* ============================================================
+   SEARCH
+============================================================ */
+function toggleSearch() {
+  const input = document.getElementById('searchInput');
+  input.classList.toggle('open');
+  if (input.classList.contains('open')) input.focus();
+  else { input.value = ''; if (currentPage === 'search') showPage('home'); }
+}
+
+function liveSearch(val) {
+  if (val.length < 2) {
+    if (currentPage === 'search') showPage('home');
+    return;
+  }
+  const results = searchContent(val);
+  document.getElementById('searchResultsLabel').textContent = `Showing ${results.length} results for "${val}"`;
+  const grid = document.getElementById('searchGrid');
+  grid.innerHTML = results.length ? results.map(item => createPageCard(item)).join('') :
+    `<div class="empty-state"><div class="empty-icon">🔍</div><h3>No results for "${val}"</h3><p>Try a different keyword</p></div>`;
+  showPage('search');
+}
+
+/* ============================================================
+   PAGE NAVIGATION
+============================================================ */
+function showPage(page) {
+  currentPage = page;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page)?.classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  window.scrollTo(0, 0);
+}
+
+function closeAll() { showPage('home'); }
+
+/* ============================================================
+   NAVBAR UTILITIES
+============================================================ */
+function toggleMobileNav() {
+  const links = document.getElementById('navLinks');
+  links.classList.toggle('mobile-open');
+}
+
+function toggleProfileMenu() {
+  document.getElementById('profileDropdown').classList.toggle('open');
+}
+function closeProfileMenu() {
+  document.getElementById('profileDropdown').classList.remove('open');
+}
+
+function toggleNotif() {
+  document.getElementById('notifPanel').classList.toggle('open');
+  document.getElementById('notifDot').style.display = 'none';
+}
+function closeNotifPanel() {
+  document.getElementById('notifPanel').classList.remove('open');
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+let toastTimeout;
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// SLIDER
-function slide(btn, dir) {
-  const row = btn.parentElement.querySelector('.movie-row');
-  row.scrollBy({ left: dir * 700, behavior: 'smooth' });
-}
-
-// SEARCH
-document.getElementById('searchInput').addEventListener('input', function () {
-  const val = this.value.toLowerCase().trim();
-  let existing = document.querySelector('.search-results');
-  if (existing) existing.remove();
-  if (!val) return;
-  const results = getAllMovies().filter(m => m.title.toLowerCase().includes(val) || m.genre.toLowerCase().includes(val));
-  if (!results.length) return;
-  const box = document.createElement('div');
-  box.className = 'search-results';
-  results.slice(0, 6).forEach(m => {
-    const item = document.createElement('div');
-    item.className = 'search-result-item';
-    item.innerHTML = `${m.title} <span>${m.genre} · ${m.year}</span>`;
-    item.onclick = () => { showModal(m.title); this.value = ''; box.remove(); };
-    box.appendChild(item);
-  });
-  this.parentElement.appendChild(box);
-});
-
-document.addEventListener('click', () => {
-  const r = document.querySelector('.search-results');
-  if (r) r.remove();
-});
-
-// NAVBAR SCROLL
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  nav.classList.toggle('scrolled', window.scrollY > 80);
-});
-
-// KEYBOARD
+/* ============================================================
+   KEYBOARD SHORTCUTS
+============================================================ */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-
-// INIT
-window.addEventListener('DOMContentLoaded', () => {
-  renderCards('trending', movies.trending);
-  renderCards('topRated', movies.topRated);
-  renderCards('tvShows', movies.tvShows);
-  renderCards('action', movies.action);
+  if (e.key === 'Escape') {
+    closeModal();
+    closePlayer();
+    const si = document.getElementById('searchInput');
+    si.value = '';
+    si.classList.remove('open');
+  }
+  if (e.key === ' ' && document.getElementById('playerOverlay').classList.contains('open')) {
+    e.preventDefault();
+    playerAction('playpause');
+  }
 });
